@@ -7,17 +7,30 @@
     <title>Guessing Game</title>
 </head>
 <body>
-    const hints = ["Facebook was launched",
-                   "Einstein's theory of special relativity published",
-                   "Apple introduces the Macintosh",
-                   "Airbnb is founded in San Francisco"
-    ]
-
-    const years = [2004, 
-                   1904,
-                   1984,
-                   2008
-    ]
     
+    <script>
+        //Add hints and years. 
+        const hints = ["Facebook was launched",
+                       "Einstein's theory of special relativity published",
+                       "Apple introduces the Macintosh",
+                       "Airbnb is founded in San Francisco"
+        ]
+
+        const years = [2004, 
+                       1904,
+                       1984,
+                       2008
+        ]
+        
+        //Computer chooses a random year from above list
+        const computerChoice = Math.floor(Math.random() * hints.length);
+        console.log(`Computer hint ${hints[computerChoice]}`);
+        console.log(`Computer year ${years[computerChoice]}`);
+
+        //Display hint to user 
+        document.write(`Can you guess the 4-digit year??<br> ${hints[computerChoice]}`);
+
+
+    </script> 
 </body>
 </html>
