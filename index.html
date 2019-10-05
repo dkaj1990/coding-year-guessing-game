@@ -7,9 +7,13 @@
     <title>Guessing Game</title>
 </head>
 <body>
-    
+    <h1>Guessing Game</h1>
+    <h2 id="sub-header"></h2>
+    <h3 id="hint"></h3>
+    <div id="char-1">_</div>
     <script>
         //Add hints and years. 
+        document.getElementById("sub-header").innerHTML = `Guess the 4-digit year`
         const hints = ["Facebook was launched",
                        "Einstein's theory of special relativity published",
                        "Apple introduces the Macintosh",
@@ -28,7 +32,13 @@
         console.log(`Computer year ${years[computerChoice]}`);
 
         //Display hint to user 
+        document.getElementById(`hint`).innerHTML = hints[computerChoice];
         document.write(`Can you guess the 4-digit year??<br> ${hints[computerChoice]}`);
+        document.onkeyup = function(event){
+            document.getElementById(`char-1`).innerHTML = event.key;
+            
+
+        }
 
 
     </script> 
