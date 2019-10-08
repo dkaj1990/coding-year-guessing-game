@@ -10,7 +10,14 @@
     <h1>Guessing Game</h1>
     <h2 id="sub-header"></h2>
     <h3 id="hint"></h3>
-    <div id="char-1">_</div>
+    <div class="year-container">
+        <p id="char-0">_</p>
+        <p id="char-1">_</p>
+        <p id="char-2">_</p>
+        <p id="char-3">_</p>
+    </div>
+    
+
     <script>
         //Add hints and years. 
         document.getElementById("sub-header").innerHTML = `Guess the 4-digit year`
@@ -20,10 +27,10 @@
                        "Airbnb is founded in San Francisco"
         ]
 
-        const years = [2004, 
-                       1904,
-                       1984,
-                       2008
+        const years = [`2004`, 
+                       `1904`,
+                       `1984`,
+                       `2008`
         ]
         
         //Computer chooses a random year from above list
@@ -34,10 +41,38 @@
         //Display hint to user 
         document.getElementById(`hint`).innerHTML = hints[computerChoice];
         document.write(`Can you guess the 4-digit year??<br> ${hints[computerChoice]}`);
-        document.onkeyup = function(event){
-            document.getElementById(`char-1`).innerHTML = event.key;
+        let charIndex = 0;
+        let noOfAttemptsLeft = 5;
+        let alreadyGuessed = [];
+        //Check if user has attempts left 
+        
+        for(let noOfAttemptsLeft = 5; noOfAttemptsLeft>0; noOfAttemptsLeft--){
+            console.log(`Attempts Left ${noOfAttemptsLeft}`)
+            document.onkeyup = function(event){
             
+            if(compareWithComputerYear(event.key)){
+                console.log(`Im inside cz its true`);
+                document.getElementById(`char-${charIndex}`).innerHTML = event.key;
+                charIndex++;
+                if(charIndex === 4){
+                    document.write(`Winner`);
+                }
+            }else{
+                alreadyGuessed.push(event.key);
+                console.log(alreadyGuessed);
+                document.getElementById(`char-${charIndex}`).innerHTML = `_`;
+                noOfAttemptsLeft -= 1;
+            }
+        }
 
+        }
+        
+        function compareWithComputerYear(userChar){
+            
+            if(userChar === years[computerChoice].charAt(charIndex)){
+                console.log(`I m inside. userchar is ${userChar} and como char is ${years[computerChoice].charAt(charIndex)}`);
+                return true;
+            }
         }
 
 
