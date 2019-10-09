@@ -5,21 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Guessing Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <h1>Guessing Game</h1>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Welcome!</h1>
+            <h2>Guessing Game</h2>
+        </div>
+        <div class="row container">
+            <div class="col-3 stat container">
+                <div>Score</div>
+                <div id="score"></div>
+            </div>
+            <div class="col-4 stat container">
+                <div>Attempts Left</div>
+                <div id="attempts"></div>
+            </div>
+            <div class="col-5 stat container">
+                <div>Guessed</div>
+                <div id="guessed"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                    <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row no-gutters">
+                              <div class="col-md-4">
+                                <img src="assets/images/fb.webp" class="card-img" alt="...">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="card-title" id="hint">Card title</h5>
+                                  <p class="card-text">
+                                        <div class="year-container">
+                                                <p id="char-0" class="char">_</p>
+                                                <p id="char-1" class="char">_</p>
+                                                <p id="char-2" class="char">_</p>
+                                                <p id="char-3" class="char">_</p>
+                                            </div>
+
+                                  </p>
+                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    
     <h2 id="sub-header"></h2>
     <h3 id="hint"></h3>
-    <div class="year-container">
-        <p id="char-0" class="char">_</p>
-        <p id="char-1" class="char">_</p>
-        <p id="char-2" class="char">_</p>
-        <p id="char-3" class="char">_</p>
-    </div>
-    <div id="score"></div>
-    <div id="attempts"></div>
+  
+    
+    
+
     <script>
+
         //Add hints and years. 
         document.getElementById("sub-header").innerHTML = `Guess the 4-digit year`
         const hints = ["Facebook was launched",
@@ -33,7 +86,13 @@
                        `1984`,
                        `2008`
         ]
-        
+
+        const images = [`fb`,
+                        `es`,
+                        `ap`,
+                        `ab`
+        ]
+        let guessed = [];
         //Computer chooses a random year from above list
         const computerChoice = Math.floor(Math.random() * hints.length);
         console.log(`Computer hint ${hints[computerChoice]}`);
@@ -44,7 +103,10 @@
         //document.write(`Can you guess the 4-digit year??<br> ${hints[computerChoice]}`);
         let charIndex = 0;
         let noOfAttemptsLeft = 5;
-        let alreadyGuessed = [];
+        let score = 0;
+        
+
+        updateStats();
 
         //Check if user has attempts left 
       //  for(let noOfAttemptsLeft = 5; noOfAttemptsLeft>0; noOfAttemptsLeft--){
@@ -61,17 +123,20 @@
                 document.getElementById(`char-${charIndex}`).innerHTML = event.key;
                 document.getElementById(`char-${charIndex}`).setAttribute('style', 'color: green');
                 charIndex++;
+                score += 1;
+                updateStats();
+                
                 if(charIndex === 4){
                     document.write(`You're smart! <br> Play again?` );
                 }
-                displayStats();
+                
             }else{
-                alreadyGuessed.push(event.key);
-                console.log(alreadyGuessed);
+                //alreadyGuessed.push(event.key);
+               // console.log(alreadyGuessed);
                 document.getElementById(`char-${charIndex}`).innerHTML = `_`;
-                noOfAttemptsLeft -= 1;
+                noOfAttemptsLeft--;
                 console.log(`No of attempts left ${noOfAttemptsLeft}`)
-                displayStats()
+                updateStats();
             }
          }else{
              document.write(`Sorry, you're out of attempts!`);
@@ -88,11 +153,19 @@
             }
         }
 
-        function displayStats(){
+        function updateStats(){
+            let scoreStat = document.getElementById("score");
+            scoreStat.textContent = score;
+
+            let attemptsStats = document.getElementById("attempts");
+            attemptsStats.textContent = noOfAttemptsLeft;  
             
         }
 
 
     </script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
