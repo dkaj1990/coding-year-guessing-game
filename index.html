@@ -137,6 +137,9 @@
                 noOfAttemptsLeft--;
                 console.log(`No of attempts left ${noOfAttemptsLeft}`)
                 updateStats();
+                guessed.push(event.key);
+                updateGuessed(guessed);
+                console.log(guessed);
             }
          }else{
              document.write(`Sorry, you're out of attempts!`);
@@ -160,6 +163,11 @@
             let attemptsStats = document.getElementById("attempts");
             attemptsStats.textContent = noOfAttemptsLeft;  
             
+        }
+
+        function updateGuessed(guessed){
+            let newGuessed = document.getElementById("guessed");
+            newGuessed.textContent = guessed; 
         }
 
 
