@@ -2,3 +2,8 @@
 .year-container{
     display: inline-block;
 }
+
+.char{
+width:30px;
+display: inline;
+}

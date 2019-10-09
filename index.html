@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Guessing Game</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <h1>Guessing Game</h1>
     <h2 id="sub-header"></h2>
     <h3 id="hint"></h3>
     <div class="year-container">
-        <p id="char-0">_</p>
-        <p id="char-1">_</p>
-        <p id="char-2">_</p>
-        <p id="char-3">_</p>
+        <p id="char-0" class="char">_</p>
+        <p id="char-1" class="char">_</p>
+        <p id="char-2" class="char">_</p>
+        <p id="char-3" class="char">_</p>
     </div>
-    
-
+    <div id="score"></div>
+    <div id="attempts"></div>
     <script>
         //Add hints and years. 
         document.getElementById("sub-header").innerHTML = `Guess the 4-digit year`
@@ -40,32 +41,44 @@
 
         //Display hint to user 
         document.getElementById(`hint`).innerHTML = hints[computerChoice];
-        document.write(`Can you guess the 4-digit year??<br> ${hints[computerChoice]}`);
+        //document.write(`Can you guess the 4-digit year??<br> ${hints[computerChoice]}`);
         let charIndex = 0;
         let noOfAttemptsLeft = 5;
         let alreadyGuessed = [];
+
         //Check if user has attempts left 
+      //  for(let noOfAttemptsLeft = 5; noOfAttemptsLeft>0; noOfAttemptsLeft--){
+        //    console.log(`Attempts Left` + noOfAttemptsLeft);
+       
         
-        for(let noOfAttemptsLeft = 5; noOfAttemptsLeft>0; noOfAttemptsLeft--){
-            console.log(`Attempts Left ${noOfAttemptsLeft}`)
             document.onkeyup = function(event){
+                if(noOfAttemptsLeft > 0){
+
             
             if(compareWithComputerYear(event.key)){
                 console.log(`Im inside cz its true`);
+                
                 document.getElementById(`char-${charIndex}`).innerHTML = event.key;
+                document.getElementById(`char-${charIndex}`).setAttribute('style', 'color: green');
                 charIndex++;
                 if(charIndex === 4){
-                    document.write(`Winner`);
+                    document.write(`You're smart! <br> Play again?` );
                 }
+                displayStats();
             }else{
                 alreadyGuessed.push(event.key);
                 console.log(alreadyGuessed);
                 document.getElementById(`char-${charIndex}`).innerHTML = `_`;
                 noOfAttemptsLeft -= 1;
+                console.log(`No of attempts left ${noOfAttemptsLeft}`)
+                displayStats()
             }
-        }
+         }else{
+             document.write(`Sorry, you're out of attempts!`);
+         }
+        }   
 
-        }
+      //  }
         
         function compareWithComputerYear(userChar){
             
@@ -73,6 +86,10 @@
                 console.log(`I m inside. userchar is ${userChar} and como char is ${years[computerChoice].charAt(charIndex)}`);
                 return true;
             }
+        }
+
+        function displayStats(){
+            
         }
 
 
