@@ -129,7 +129,7 @@
                 
             }else{
                 document.getElementById(`char-${charIndex}`).innerHTML = `_`;
-                noOfAttemptsLeft--;
+                --noOfAttemptsLeft;
                 console.log(`No of attempts left ${noOfAttemptsLeft}`)
                 updateStats();
                 guessed.push(event.key);
@@ -137,7 +137,10 @@
                 console.log(guessed);
             }
          }else{
-             document.write(`Sorry, you're out of attempts!`);
+            let img = document.getElementById("main-image");
+                img.setAttribute('src', 'assets/images/blnt.jfif');
+                document.getElementById("hint").textContent = `Sorry you're out of attempts, your score is ${score}`; 
+             //document.write(`Sorry, you're out of attempts!`);
          }
         }   
         
