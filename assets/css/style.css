@@ -12,7 +12,8 @@ display: inline;
     background: indianred;
     font-size: 30px;
     text-align: center;
-    color: aliceblue;
-   
-    
+    color: aliceblue; 
+}
+.question{
+    margin: auto;
 }

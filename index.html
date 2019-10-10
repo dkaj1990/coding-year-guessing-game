@@ -30,10 +30,10 @@
         </div>
         <div class="row">
             <div class="col-12">
-                    <div class="card mb-3" style="max-width: 540px;">
+                    <div class="card mb-3 question" style="max-width: 540px;">
                             <div class="row no-gutters">
                               <div class="col-md-4">
-                                <img src="assets/images/fb.webp" class="card-img" alt="...">
+                                <img src="assets/images/question.jfif" class="card-img" alt="..." id="main-image">
                               </div>
                               <div class="col-md-8">
                                 <div class="card-body">
@@ -47,7 +47,7 @@
                                             </div>
 
                                   </p>
-                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                  <p class="card-text"><small class="text-muted"></small></p>
                                 </div>
                               </div>
                             </div>
@@ -75,10 +75,10 @@
 
         //Add hints and years. 
         document.getElementById("sub-header").innerHTML = `Guess the 4-digit year`
-        const hints = ["Facebook was launched",
-                       "Einstein's theory of special relativity published",
-                       "Apple introduces the Macintosh",
-                       "Airbnb is founded in San Francisco"
+        const hints = ["When was Facebook launched?",
+                       "When was Einstein's theory of special relativity published?",
+                       "When did Apple introduces the Macintosh?",
+                       "When was Airbnb founded in San Francisco?"
         ]
 
         const years = [`2004`, 
@@ -100,18 +100,12 @@
 
         //Display hint to user 
         document.getElementById(`hint`).innerHTML = hints[computerChoice];
-        //document.write(`Can you guess the 4-digit year??<br> ${hints[computerChoice]}`);
         let charIndex = 0;
         let noOfAttemptsLeft = 5;
         let score = 0;
         
 
-        updateStats();
-
-        //Check if user has attempts left 
-      //  for(let noOfAttemptsLeft = 5; noOfAttemptsLeft>0; noOfAttemptsLeft--){
-        //    console.log(`Attempts Left` + noOfAttemptsLeft);
-       
+        updateStats();     
         
             document.onkeyup = function(event){
                 if(noOfAttemptsLeft > 0){
@@ -127,12 +121,12 @@
                 updateStats();
                 
                 if(charIndex === 4){
-                    document.write(`You're smart! <br> Play again?` );
+
+                    //document.write(`You're smart! <br> Play again?` );
+                    
                 }
                 
             }else{
-                //alreadyGuessed.push(event.key);
-               // console.log(alreadyGuessed);
                 document.getElementById(`char-${charIndex}`).innerHTML = `_`;
                 noOfAttemptsLeft--;
                 console.log(`No of attempts left ${noOfAttemptsLeft}`)
@@ -145,8 +139,6 @@
              document.write(`Sorry, you're out of attempts!`);
          }
         }   
-
-      //  }
         
         function compareWithComputerYear(userChar){
             
@@ -159,6 +151,13 @@
         function updateStats(){
             let scoreStat = document.getElementById("score");
             scoreStat.textContent = score;
+            if(score === 4){
+                //document.getElementById("main-image").style.visibility = "hidden";
+                let img = document.getElementById("main-image");
+                img.setAttribute('src', 'assets/images/win.jpg');
+                document.getElementById("hint").textContent = `You win, your score is ${score}`; 
+
+            }
 
             let attemptsStats = document.getElementById("attempts");
             attemptsStats.textContent = noOfAttemptsLeft;  
