@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron heading">
             <h1>Welcome!</h1>
             <h2>Guessing Game</h2>
         </div>
@@ -74,10 +74,10 @@
     <script>
 
         //Add hints and years. 
-        document.getElementById("sub-header").innerHTML = `Guess the 4-digit year`
+        document.getElementById("sub-header").innerHTML = ``
         const hints = ["When was Facebook launched?",
                        "When was Einstein's theory of special relativity published?",
-                       "When did Apple introduces the Macintosh?",
+                       "When did Apple introduce the Macintosh?",
                        "When was Airbnb founded in San Francisco?"
         ]
 
@@ -100,6 +100,7 @@
 
         //Display hint to user 
         document.getElementById(`hint`).innerHTML = hints[computerChoice];
+        document.getElementById("main-image").setAttribute('src', `assets/images/${images[computerChoice]}.jpg`);
         let charIndex = 0;
         let noOfAttemptsLeft = 5;
         let score = 0;
